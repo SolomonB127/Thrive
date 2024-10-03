@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:thrive/database/habit_database.dart';
 import 'package:thrive/theme/theme_provider.dart';
 
 import 'pages/home_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // initialize database
+  await HabitDatabase.initialize();
+  await HabitDatabase().firstLaunch();
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeProvider(),
     child: const MainApp(),
