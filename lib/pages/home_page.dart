@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thrive/components/drawer.dart';
 import 'package:thrive/database/habit_database.dart';
+import 'package:thrive/models/habit.dart';
+import 'package:thrive/utils/habit_util.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -85,6 +87,32 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.tertiary,
         child: const Icon(Icons.add),
       ),
+      body: _buildHabitList(),
     );
+  }
+
+  // Habit List
+  Widget _buildHabitList() {
+    // habit db
+    final habitDb = context.watch<HabitDatabase>();
+
+    // current habits
+    List<Habit> currentHabits = habitDb.currentHabit;
+
+    // return list of habits to UI
+    return ListView.builder(
+        itemCount: currentHabits.length,
+        itemBuilder: (context, index) {
+          // get each individual habit
+          final habit = currentHabits[index];
+
+          // check if habit is completed or not
+          bool isCompletedToday = isHabitCompletedToday(habit.completedDays);
+
+          // return habit title to UI
+          return ListTile(
+            title: Text(habit.name),
+          );
+        });
   }
 }
