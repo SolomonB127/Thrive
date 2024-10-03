@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thrive/components/drawer.dart';
+import 'package:thrive/components/habit_tile.dart';
 import 'package:thrive/database/habit_database.dart';
 import 'package:thrive/models/habit.dart';
 import 'package:thrive/utils/habit_util.dart';
@@ -19,6 +20,14 @@ class _HomePageState extends State<HomePage> {
     // read existing habit on app startup
     Provider.of<HabitDatabase>(context, listen: false).readHabits();
     super.initState();
+  }
+
+// check habit on/off if isCompleted
+  void checkHabit(bool? value, Habit habit) {
+    // update habit completion status
+    if (value != null) {
+      context.read<HabitDatabase>().updateHabitCompletion(habit.id, value);
+    }
   }
 
   // Text Controller
@@ -110,8 +119,10 @@ class _HomePageState extends State<HomePage> {
           bool isCompletedToday = isHabitCompletedToday(habit.completedDays);
 
           // return habit title to UI
-          return ListTile(
-            title: Text(habit.name),
+          return HabitTile(
+            isCompleted: isCompletedToday,
+            text: habit.name,
+            onChanged: (value) => checkHabit(value, habit),
           );
         });
   }
