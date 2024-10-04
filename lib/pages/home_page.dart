@@ -207,8 +207,8 @@ class _HomePageState extends State<HomePage> {
             isCompleted: isCompletedToday,
             text: habit.name,
             onChanged: (value) => checkHabit(value, habit),
-            onEdit: (context) => editHabit,
-            onDelete: (context) => deleteHabit,
+            onEdit: (context) => editHabit(habit),
+            onDelete: (context) => deleteHabit(habit),
           );
         });
   }
