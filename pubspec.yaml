@@ -9,19 +9,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider:                                          # State management
-  isar:                                                 # Database
-  isar_flutter_libs:                            # Flutter support for Isar
-  path_provider:                                # Access to the filesystem
-  intl:                                                 # Internationalization and localization
-  flutter_slidable:                             # Slidable list items
+  provider:
+  isar:
+  isar_flutter_libs:
+  path_provider:
+  intl:
+  flutter_slidable:
+  flutter_heatmap_calendar: ^1.0.5
 
 dev_dependencies:
-  flutter_test:                                  # Flutter testing framework
-    sdk: flutter                                  
-  flutter_lints: ^3.0.0                       # Linting rules for Flutter projects
-  isar_generator:                              # Code generation for Isar
-  build_runner:                                 # Build system for code generation
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  isar_generator:
+  build_runner:
 
 flutter:
-  uses-material-design: true             # Enables material design
+  uses-material-design: true
