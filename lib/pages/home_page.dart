@@ -231,6 +231,8 @@ class _HomePageState extends State<HomePage> {
     // return list of habits to UI
     return ListView.builder(
         itemCount: currentHabits.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           // get each individual habit
           final habit = currentHabits[index];
