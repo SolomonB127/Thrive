@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Text Controller
-  final textController = TextEditingController();
+  final TextEditingController textController = TextEditingController();
   // new habit method
   void createNewHabit() {
     showDialog(
@@ -46,6 +46,18 @@ class _HomePageState extends State<HomePage> {
                     const InputDecoration(hintText: "Create a new habit"),
               ),
               actions: <Widget>[
+                // cancel button
+                MaterialButton(
+                  onPressed: () {
+                    // pop box
+                    Navigator.pop(context);
+
+                    // clear controller
+                    textController.clear();
+                  },
+                  child: const Text("Cancel"),
+                ),
+
                 // save button
                 MaterialButton(
                   onPressed: () {
@@ -63,18 +75,6 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text("Save"),
                 ),
-
-                // cancel button
-                MaterialButton(
-                  onPressed: () {
-                    // pop box
-                    Navigator.pop(context);
-
-                    // clear controller
-                    textController.clear();
-                  },
-                  child: const Text("Cancel"),
-                )
               ],
             ));
   }
@@ -91,6 +91,18 @@ class _HomePageState extends State<HomePage> {
                 controller: textController,
               ),
               actions: <Widget>[
+                // cancel button
+                MaterialButton(
+                  onPressed: () {
+                    // pop box
+                    Navigator.pop(context);
+
+                    // clear controller
+                    textController.clear();
+                  },
+                  child: const Text("Cancel"),
+                ),
+
                 // save button
                 MaterialButton(
                   onPressed: () {
@@ -110,18 +122,6 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text("Edit"),
                 ),
-
-                // cancel button
-                MaterialButton(
-                  onPressed: () {
-                    // pop box
-                    Navigator.pop(context);
-
-                    // clear controller
-                    textController.clear();
-                  },
-                  child: const Text("Cancel"),
-                )
               ],
             ));
   }
@@ -134,8 +134,19 @@ class _HomePageState extends State<HomePage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: const Text("Are tou sure you want to delete"),
+              title: const Text("Are you sure you want to delete"),
               actions: <Widget>[
+                // cancel button
+                MaterialButton(
+                  onPressed: () {
+                    // pop box
+                    Navigator.pop(context);
+
+                    // clear controller
+                    textController.clear();
+                  },
+                  child: const Text("Cancel"),
+                ),
                 // save button
                 MaterialButton(
                   onPressed: () {
@@ -147,18 +158,6 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text("Delete"),
                 ),
-
-                // cancel button
-                MaterialButton(
-                  onPressed: () {
-                    // pop box
-                    Navigator.pop(context);
-
-                    // clear controller
-                    textController.clear();
-                  },
-                  child: const Text("Cancel"),
-                )
               ],
             ));
   }
@@ -211,7 +210,9 @@ class _HomePageState extends State<HomePage> {
         builder: (context, snapshot) {
           // once date is available -> build heatma
           if (snapshot.hasData) {
-            return HabitHeatMap(startDate: snapshot.data!, datasets: prepareHeatMapData(currentHabit));
+            return HabitHeatMap(
+                startDate: snapshot.data!,
+                datasets: prepareHeatMapData(currentHabit));
           }
           // if no date is returned?
           else {

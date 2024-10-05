@@ -17,14 +17,16 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(8)),
+            color: Colors.grey[800], borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
         margin: const EdgeInsets.only(top: 10),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const Text("Dark Mode"),
+              const Text(
+                "Dark Mode",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               CupertinoSwitch(
                   value: Provider.of<ThemeProvider>(context).isDarkMode,
                   onChanged: (value) =>
