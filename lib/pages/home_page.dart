@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:thrive/components/drawer.dart';
 import 'package:thrive/components/habit_tile.dart';
 import 'package:thrive/database/habit_database.dart';
 import 'package:thrive/models/habit.dart';
 import 'package:thrive/utils/habit_util.dart';
+
+import '../components/heat_map.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -183,8 +186,38 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.tertiary,
         child: const Icon(Icons.add),
       ),
-      body: _buildHabitList(),
+      body: ListView(
+        children: <Widget>[
+          // HEAT MAP
+          _buildHeatMap(),
+          // HABIT  LIST
+          _buildHabitList(),
+        ],
+      ),
     );
+  }
+
+  // Heat map
+  Widget _buildHeatMap() {
+    // habit database
+    final habitDb = context.watch<HabitDatabase>();
+
+    // current habits
+    List<Habit> currentHabit = habitDb.currentHabit;
+
+    // return heatmap UI
+    return FutureBuilder<DateTime?>(
+        future: habitDb.getFirstLaunch(),
+        builder: (context, snapshot) {
+          // once date is available -> build heatma
+          if (snapshot.hasData) {
+            return HabitHeatMap(startDate: snapshot.data!, datasets: prepareHeatMapData(currentHabit));
+          }
+          // if no date is returned?
+          else {
+            return Container();
+          }
+        });
   }
 
   // Habit List
