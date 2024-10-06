@@ -155,6 +155,9 @@ class _HomePageState extends State<HomePage> {
 
                     // pop box
                     Navigator.pop(context);
+
+                    // clear controller
+                    textController.clear();
                   },
                   child: const Text("Delete"),
                 ),
@@ -183,7 +186,10 @@ class _HomePageState extends State<HomePage> {
         onPressed: createNewHabit,
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.tertiary,
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.black,
+        ),
       ),
       body: ListView(
         children: <Widget>[
